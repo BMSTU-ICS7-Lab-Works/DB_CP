@@ -4,7 +4,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if request.session.role == 1 %}
+{% if request.session.role == 1 or request.session.role == 2%}
   Hi ABOBA!
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}

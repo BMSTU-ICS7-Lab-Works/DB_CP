@@ -24,19 +24,14 @@ def login(request):
         founded = session.query(Users).filter(Users.nickname == request.POST.get('username')).first()
         session.close()
         password_to_check = request.POST.get('password')
-        print(founded)
-        salt = founded.salt.fromhex()
-        print('salt = ', salt)
+        salt = bytes.fromhex(founded.salt)
         new_key = hashlib.pbkdf2_hmac(
             'sha256',
-            password_to_check.encode('utf-8')[1:],
+            password_to_check.encode('utf-8'),
             salt,
             100000
         )
-        print(new_key)
-        print(founded.password)
-        print(founded.password.encode('utf-8')[1:])
-        if new_key == founded.password.encode('utf-8')[1:]:
+        if new_key.hex() == founded.password:
             request.session['role'] = founded.role
             return redirect('/home')
         else:

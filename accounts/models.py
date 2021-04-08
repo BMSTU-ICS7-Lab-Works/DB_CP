@@ -28,6 +28,7 @@ class Users(Base):
     def __repr__(self):
         return "<Users('%s', '%s', '%s', '%s')>" % (self.nickname, self.password, self.salt, self.role)
 
+
 if __name__ == '__main__':
     Base.metadata.create_all(admin_engine)
     Session = sessionmaker(bind=admin_engine)
@@ -35,16 +36,11 @@ if __name__ == '__main__':
 
     salt = os.urandom(32)  # Запомните
     password = 'gbgtnrf1'
-    print(salt)
     key = hashlib.pbkdf2_hmac(
         'sha256',
         password.encode('utf-8'),
         salt,
         100000)
-    print(key)
-    admin_user = Users('admin', key, salt, 2)
+    admin_user = Users('admin', key.hex(), salt.hex(), 2)
     session.add(admin_user)
-    # ourSight = session.query(Sights).first()
-    # print(ourSight)
-    # print(vasiliSight.id)
     session.commit()
