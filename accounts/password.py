@@ -1,7 +1,7 @@
 import hashlib
 import os
-from DB_CP.session_manager import Session_Manager
 from .models import Users
+from.account_repositories import UsersRepository
 
 def get_hashed_password(password, salt=None):
     if salt is None:
@@ -14,51 +14,35 @@ def get_hashed_password(password, salt=None):
     )
     return key, salt
 
-def find_user(username):
-    session_manager = Session_Manager()
-    session_manager.setRole(0)
-    session = session_manager.getSession()
 
-    founded = session.query(Users).filter(Users.nickname == username).first()
-    session.close()
-    if founded is None:
+def find_user(username):
+    userRep = UsersRepository(0)
+    if userRep.findUserByName(username) is None:
         return False
     else:
         return True
 
 
 def check_user_login(username, password):
-    session_manager = Session_Manager()
-    session_manager.setRole(0)
-    session = session_manager.getSession()
-    founded = session.query(Users).filter(Users.nickname == username).first()
-    session.close()
-    if founded is None:
+    userRep = UsersRepository(0)
+    fuser = userRep.findUserByName(username)
+    if fuser is None:
         return False
-    password_to_check = password
-    salt = bytes.fromhex(founded.salt)
-    key, salt = get_hashed_password(password_to_check, salt)
-    if key.hex() == founded.password:
+    salt = bytes.fromhex(fuser.salt)
+    key, salt = get_hashed_password(password, salt)
+    if key.hex() == fuser.password:
         return True
     else:
         return False
 
+
 def get_role(username):
-    session_manager = Session_Manager()
-    session_manager.setRole(0)
-    session = session_manager.getSession()
-    founded = session.query(Users).filter(Users.nickname == username).first()
-    session.close()
-    return founded.role
+    userRep = UsersRepository(0)
+    fuser = userRep.findUserByName(username)
+    return fuser.role
+
 
 def addUser(username, password):
     key, salt = get_hashed_password(password)
-    session_manager = Session_Manager()
-    session_manager.setRole(0)
-    session = session_manager.getSession()
-
-    user = Users(username, key.hex(), salt.hex(), 1)
-
-    session.add(user)
-    session.commit()
-    session.close()
+    userRep = UsersRepository(0)
+    userRep.addUser(Users(username, key.hex(), salt.hex(), 1))
