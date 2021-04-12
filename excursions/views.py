@@ -29,14 +29,17 @@ def createExcursion(request):
 def createSight(request):
 
     if request.method == "POST":
-        name = request.POST.get("name")
-        build_date = request.POST.get("build_date")
-        type = request.POST.get("type")
-        author = request.POST.get("author")
-        description = request.POST.get("description")
+        form = createSightForm()
 
-        addSight(name, build_date, type, author, description)
-        return HttpResponse("Harosh")
+        if form.is_valid():
+            name = request.POST.get("name")
+            build_date = request.POST.get("build_date")
+            type = request.POST.get("type")
+            author = request.POST.get("author")
+            description = request.POST.get("description")
+
+            addSight(name, build_date, type, author, description)
+            return HttpResponse("Harosh")
     else:
         if request.session['role'] > 1:
             form = createSightForm()

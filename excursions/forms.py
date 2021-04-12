@@ -1,4 +1,6 @@
 from django import forms
+from django.core.exceptions import ValidationError
+import datetime
 
 class createExcursionForm(forms.Form):
     name = forms.CharField()
@@ -15,6 +17,13 @@ class createSightForm(forms.Form):
     type = forms.CharField()
     author = forms.CharField()
     description = forms.CharField()
+
+    def clean_build_date(self):
+        #tut cheta shamanit'
+        data = self.cleaned_data['build_date']
+
+        if data > datetime.date.today():
+            raise ValidationError('Invalid build date')
 
 class createGuideForm(forms.Form):
     first_name = forms.CharField()
