@@ -1,13 +1,13 @@
 <!-- templates/registration/login.html -->
 {% extends 'base.html' %}
 
-{% block title %}SightAdd{% endblock %}
+{% block title %}GuideAdd{% endblock %}
 
 {% block content %}
-<h2>Add Sight</h2>
+<h2>Add Guide</h2>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">sight add</button>
+  <button type="submit">Add guide</button>
 </form>
 {% endblock %}

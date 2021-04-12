@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from .forms import LoginForm, RegistrateForm
 from .password import *
 
+
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
