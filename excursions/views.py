@@ -3,8 +3,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .forms import createExcursionForm, createSightForm, createGuideForm
 from .BL import *
 
+
 def startpage(request):
     return HttpResponse("Hello, world. You're at the polls index.")
+
 
 def createExcursion(request):
     if request.method == "POST":

@@ -1,11 +1,11 @@
-from DB_CP.session_manager import Session_Manager
+from DB_CP.sessionmanager import SessionManager
 from .models import Users
 
 
 class UsersRepository:
     def __init__(self, role):
         self.role = role
-        session_manager = Session_Manager()
+        session_manager = SessionManager()
         session_manager.setRole(role)
         self.session = session_manager.getSession()
 
@@ -15,6 +15,6 @@ class UsersRepository:
     def findUserByName(self, username):
         return self.session.query(Users).filter(Users.nickname == username).first()
 
-    def addUser(self, User):
-        self.session.add(User)
+    def addUser(self, user):
+        self.session.add(user)
         self.session.commit()

@@ -3,21 +3,19 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-class Session_Manager():
+class SessionManager():
 
     admin_engine = create_engine("postgresql+psycopg2://postgres:1@localhost/Excursions")
     unlogged_engine = create_engine("postgresql+psycopg2://postgres:1@localhost/Excursions")
     logged_engine = create_engine("postgresql+psycopg2://postgres:1@localhost/Excursions")
 
-
-
     def __init__(self):
         self.role = 0
         self.sessionmaker = sessionmaker(bind=self.unlogged_engine)
-        self.sesssion = self.sessionmaker()
+        self.session = self.sessionmaker()
 
     def setRole(self, role):
-        if 0 <= role <= 2:
+        if 0 <= role <= 3:
             self.role = role
         else:
             raise Exception("Wrong role")
@@ -25,16 +23,16 @@ class Session_Manager():
     def getSession(self):
         if self.role == 0:
             self.sessionmaker = sessionmaker(bind=self.admin_engine)
-            self.sesssion = self.sessionmaker()
-            return self.sesssion
+            self.session = self.sessionmaker()
+            return self.session
         elif self.role == 1:
             self.sessionmaker = sessionmaker(bind=self.unlogged_engine)
-            self.sesssion = self.sessionmaker()
-            return self.sesssion
+            self.session = self.sessionmaker()
+            return self.session
         elif self.role == 2:
             self.sessionmaker = sessionmaker(bind=self.logged_engine)
-            self.sesssion = self.sessionmaker()
-            return self.sesssion
+            self.session = self.sessionmaker()
+            return self.session
         else:
             raise Exception("Wrong role")
 

@@ -7,13 +7,11 @@ from .password import *
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        if check_user_login(username, password):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
             request.session['role'] = get_role(username)
-            return redirect('/home')
-        else:
-            return HttpResponse('Durashka')
+            return HttpResponse('URA URA')
     else:
         form = LoginForm()
     return render(request, '../templates/registration/login.html', {'form': form})

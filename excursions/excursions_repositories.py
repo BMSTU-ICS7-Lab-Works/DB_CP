@@ -1,11 +1,11 @@
-from DB_CP.session_manager import Session_Manager
+from DB_CP.sessionmanager import SessionManager
 from .models import Sights, Excursions, SightsExcursions, Guides
 
 
 class SightsRepository:
     def __init__(self, role):
         self.role = role
-        session_manager = Session_Manager()
+        session_manager = SessionManager()
         session_manager.setRole(role)
         self.session = session_manager.getSession()
 
@@ -23,7 +23,7 @@ class SightsRepository:
 class ExcursionsRepository:
     def __init__(self, role):
         self.role = role
-        session_manager = Session_Manager()
+        session_manager = SessionManager()
         session_manager.setRole(role)
         self.session = session_manager.getSession()
 
@@ -41,7 +41,7 @@ class ExcursionsRepository:
 class GuidesRepository:
     def __init__(self, role):
         self.role = role
-        session_manager = Session_Manager()
+        session_manager = SessionManager()
         session_manager.setRole(role)
         self.session = session_manager.getSession()
 

@@ -6,6 +6,12 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+    def clean_password(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        if not check_user_login(username, password):
+            raise forms.ValidationError('Incorrect username or password!')
+
 
 class RegistrateForm(forms.Form):
     username = forms.CharField()
