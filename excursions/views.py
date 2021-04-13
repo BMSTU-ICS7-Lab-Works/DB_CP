@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import createExcursionForm, createSightForm, createGuideForm
 from .BL import *
 
@@ -29,8 +29,7 @@ def createExcursion(request):
 def createSight(request):
 
     if request.method == "POST":
-        form = createSightForm()
-
+        form = createSightForm(request.POST)
         if form.is_valid():
             name = request.POST.get("name")
             build_date = request.POST.get("build_date")
@@ -39,7 +38,8 @@ def createSight(request):
             description = request.POST.get("description")
 
             addSight(name, build_date, type, author, description)
-            return HttpResponse("Harosh")
+            #vot tut eshe nado podumat s perehodami
+            return HttpResponse('URA URA')
     else:
         if request.session['role'] > 1:
             form = createSightForm()

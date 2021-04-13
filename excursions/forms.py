@@ -19,11 +19,9 @@ class createSightForm(forms.Form):
     description = forms.CharField()
 
     def clean_build_date(self):
-        #tut cheta shamanit'
-        data = self.cleaned_data['build_date']
-
-        if data > datetime.date.today():
-            raise ValidationError('Invalid build date')
+        date = self.cleaned_data['build_date']
+        if date > datetime.date.today():
+            raise forms.ValidationError('Invalid build date')
 
 class createGuideForm(forms.Form):
     first_name = forms.CharField()

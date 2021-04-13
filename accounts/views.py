@@ -26,22 +26,14 @@ def logout(request):
 
 def registration(request):
     if request.method == 'POST':
-
-        username = request.POST.get('username')
-        if find_user(username):
-            return HttpResponse('takoy chel uje est paka')
-        else:
+        form = RegistrateForm(request.POST)
+        if form.is_valid():
+            username = request.POST.get('username')
             password = request.POST.get('password')
-            if password == request.POST.get('repeat_password'):
-                addUser(username, password)
-                request.session['role'] = 1
-
-                return redirect('/home')
-            else:
-                HttpResponse('tut nado AJAX shob pisalo nepralno i povtoryalo')
-
-        return redirect('/home')
+            addUser(username, password)
+            request.session['role'] = 1
+            return HttpResponse('URA URA')
     else:
         form = RegistrateForm()
-        return render(request, '../templates/registration/registration.html', {'form': form})
+    return render(request, '../templates/registration/registration.html', {'form': form})
 
