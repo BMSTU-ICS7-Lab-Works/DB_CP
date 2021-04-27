@@ -67,3 +67,12 @@ def createGuide(request):
         else:
             return redirect('/home')
     return render(request, '../templates/excursions/create_guide.html', {'form': form})
+
+
+def watch_excursions(request):
+    excursions = getAllExcursions()
+    return render(request, '../templates/excursions/watch_excursions.html', {'excursions': excursions})
+
+
+def test(request):
+    return render(request, '../templates/excursions/test.html')

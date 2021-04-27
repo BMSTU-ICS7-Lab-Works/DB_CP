@@ -81,20 +81,19 @@ class Excursions(Base):
         self.price = price
 
     def __repr__(self):
-        return "<Excursions('%s', '%s', '%s', '%s')>" % (
-        self.name, self.description, self.guide, self.price)
+        return "%s, %s, %s, %s" % (self.name, self.description, self.guide, self.price)
 
 if __name__ == '__main__':
     Base.metadata.create_all(admin_engine)
-    Session = sessionmaker(bind=admin_engine)
-    session = Session()
-    vasiliSight = Sights('Храм Василия Блаженного', '02-10-1552', 'Шатровый храм', 'Постник Яковлев', 'православный '
-                                                    'храм на Красной площади в Москве, памятник русской архитектуры.')
-    session.add(vasiliSight)
-    # ourSight = session.query(Sights).first()
-    # print(ourSight)
-    # print(vasiliSight.id)
-    session.commit()
-    #print(vasiliSight.id)
-    session.close()
+    # Session = sessionmaker(bind=admin_engine)
+    # session = Session()
+    # vasiliSight = Sights('Храм Василия Блаженного', '02-10-1552', 'Шатровый храм', 'Постник Яковлев', 'православный '
+    #                                                 'храм на Красной площади в Москве, памятник русской архитектуры.')
+    # session.add(vasiliSight)
+    # # ourSight = session.query(Sights).first()
+    # # print(ourSight)
+    # # print(vasiliSight.id)
+    # session.commit()
+    # #print(vasiliSight.id)
+    # session.close()
 

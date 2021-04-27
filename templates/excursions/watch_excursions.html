@@ -1,13 +1,44 @@
-<!-- templates/registration/login.html -->
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".addButton").click(function(){
+    alert("Value: " + $(".excursion_name").text());
+  });
+});
+</script>
+</head>
+<body>
 
-{% block title %}SightAdd{% endblock %}
+<p>Name: <input type="text" id="test" value="Mickey Mouse"></p>
 
-{% block content %}
-<h2>Add Sight</h2>
+<button>Show Value</button>
+
+
+<h2>Excursions table</h2>
+<table>
+<tr>
+    <th>Название</th>
+    <th>Описание</th>
+    <th>Гид</th>
+    <th>Цена</th>
+    <th>Добавить</th>
+</tr>
+{% for r in excursions %}
+<tr>
+    <th class="excursion_name"> {{ r.name }}</th>
+    <th> {{ r.description }}</th>
+    <th> {{ r.guide }}</th>
+    <th> {{ r.price }}</th>
+    <th><button class="addButton">Добавить</button></th>
+</tr>
+{% endfor %}
+</table>
 <form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">sight add</button>
+    {% csrf_token %}
+    <button type="submit">Выбрать</button>
 </form>
-{% endblock %}
+</body>
+</html>

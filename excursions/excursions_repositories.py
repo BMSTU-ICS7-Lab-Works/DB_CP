@@ -37,6 +37,10 @@ class ExcursionsRepository:
         self.session.add(excursion)
         self.session.commit()
 
+    def getAllExcursions(self):
+        return self.session.query(Excursions).all()
+
+
 
 class GuidesRepository:
     def __init__(self, role):

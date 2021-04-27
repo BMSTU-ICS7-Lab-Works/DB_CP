@@ -17,3 +17,7 @@ def addExcursion(name, description, guide_name, guide_surname, guide_patronymic,
 def addGuide(first_name, last_name, patronymic, qualification, biography, experience):
     guideRep = GuidesRepository(2)
     guideRep.addGuide(Guides(first_name, last_name, patronymic, qualification, biography, experience))
+
+def getAllExcursions():
+    excursionRep = ExcursionsRepository(2)
+    return excursionRep.getAllExcursions()
