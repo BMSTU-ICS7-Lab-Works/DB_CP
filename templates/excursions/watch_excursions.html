@@ -1,18 +1,17 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load static %}
-<html>
+
+{% block title %}SightAdd{% endblock %}
+
+{% block content %}
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="{% static 'frontend/scripts/watch_excursions.js' %}" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="{% static 'frontend/styles/test.css' %}">
+    <script src="{% static "scripts/watch_excursions.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "styles/test.css" %}">
 </head>
 
 <body>
-
-<p>Name: <input type="text" id="test" value="Mickey Mouse"></p>
-
-<button>Show Value</button>
-
 
 <h2>Excursions table</h2>
 <table>
@@ -25,17 +24,14 @@
 </tr>
 {% for r in excursions %}
 <tr>
-    <th class="excursion_name"> {{ r.name }}</th>
-    <th> {{ r.description }}</th>
-    <th> {{ r.guide }}</th>
-    <th> {{ r.price }}</th>
-    <th><button class="addButton">Добавить</button></th>
+    <td class="excursion_name"> {{ r.name }}</td>
+    <td> {{ r.description }}</td>
+    <td> {{ r.guide }}</td>
+    <td> {{ r.price }}</td>
+    <td><button class="addButton">Добавить</button></td>
 </tr>
 {% endfor %}
 </table>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Выбрать</button>
-</form>
-</body>
-</html>
+{% csrf_token %}
+<button type="submit" class="sendButton">Купить</button>
+{% endblock %}

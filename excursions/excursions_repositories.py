@@ -59,3 +59,6 @@ class GuidesRepository:
     def addGuide(self, guide):
         self.session.add(guide)
         self.session.commit()
+
+    def findGuideById(self, id):
+        return self.session.query(Guides).filter(Guides.id == id).first()

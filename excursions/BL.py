@@ -21,3 +21,7 @@ def addGuide(first_name, last_name, patronymic, qualification, biography, experi
 def getAllExcursions():
     excursionRep = ExcursionsRepository(2)
     return excursionRep.getAllExcursions()
+
+def getGuideById(id):
+    guideRep = GuidesRepository(2)
+    return guideRep.findGuideById(id)

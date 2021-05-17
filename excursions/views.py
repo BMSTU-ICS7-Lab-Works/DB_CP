@@ -71,8 +71,11 @@ def createGuide(request):
 
 def watch_excursions(request):
     excursions = getAllExcursions()
-    return render(request, '../templates/excursions/watch_excursions.html', {'excursions': excursions})
-
-
-def test(request):
-    return render(request, '../templates/excursions/test.html')
+    for el in excursions:
+        guide = getGuideById(el.guide)
+        el.guide = guide.first_name + " " + guide.last_name + " " + guide.patronymic
+    if request.method == "GET":
+        return render(request, '../templates/excursions/watch_excursions.html', {'excursions': excursions})
+    else:
+        print(request.POST)
+        return render(request, '../templates/excursions/watch_excursions.html', {'excursions': excursions})
