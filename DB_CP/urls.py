@@ -23,6 +23,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('home/', TemplateView.as_view(template_name='../templates/home.html'), name='home'),
     path('admin/', admin.site.urls),
+    path('about/', TemplateView.as_view(template_name='../templates/about.html'), name='about')
 
 ]
 urlpatterns += staticfiles_urlpatterns()

@@ -30,7 +30,7 @@ class Users(Base):
 
 
 if __name__ == '__main__':
-    #Base.metadata.create_all(admin_engine)
+    Base.metadata.create_all(admin_engine)
     Session = sessionmaker(bind=admin_engine)
     session = Session()
 

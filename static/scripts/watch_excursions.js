@@ -12,6 +12,8 @@ $(document).ready(function() {
     // $("#resultas").append($item);       // Outputs the answer
   });
 
+  $('#myTable').DataTable();
+
   $(".sendButton").click(function () {
       $.ajax({
         type: "POST",
@@ -22,10 +24,11 @@ $(document).ready(function() {
   })
 
 
+
     // $('.sendButton').click(function () {
     //     $.post("http://127.0.0.1:8000/excursions/watch_excursions/",
     //         res)
     // });
-
 });
+
 

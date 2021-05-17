@@ -7,21 +7,28 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
     <script src="{% static "scripts/watch_excursions.js" %}" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="{% static "styles/test.css" %}">
+
+
 </head>
 
 <body>
 
 <h2>Excursions table</h2>
-<table>
-<tr>
+<table id=myTable class="display">
+<thead>
+<tr class="header">
     <th>Название</th>
     <th>Описание</th>
     <th>Гид</th>
     <th>Цена</th>
     <th>Добавить</th>
 </tr>
+</thead>
+<tbody>
 {% for r in excursions %}
 <tr>
     <td class="excursion_name"> {{ r.name }}</td>
@@ -31,6 +38,7 @@
     <td><button class="addButton">Добавить</button></td>
 </tr>
 {% endfor %}
+</tbody>
 </table>
 {% csrf_token %}
 <button type="submit" class="sendButton">Купить</button>
