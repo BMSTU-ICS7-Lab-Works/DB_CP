@@ -25,3 +25,7 @@ def getAllExcursions():
 def getGuideById(id):
     guideRep = GuidesRepository(2)
     return guideRep.findGuideById(id)
+
+def getAllGuides():
+    guidesRep = GuidesRepository(2)
+    return guidesRep.getAllGuides()

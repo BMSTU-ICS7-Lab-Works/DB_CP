@@ -9,22 +9,25 @@ def startpage(request):
 
 
 def createExcursion(request):
+    guides = getAllGuides()
+    if request.session['role'] > 1:
+        form = createExcursionForm(guides=guides)
+    else:
+        return redirect('/home')
     if request.method == "POST":
         excursion_name = request.POST.get("name")
         description = request.POST.get("description")
-        name = request.POST.get("guide_name")
-        surname = request.POST.get("guide_surname")
-        patronymic = request.POST.get("guide_patronymic")
+        guide_num = request.POST['guides']
+        guide = guides[int(guide_num)]
+        name = guide.first_name
+        surname = guide.last_name
+        patronymic = guide.patronymic
         price = request.POST.get("price")
-
         addExcursion(excursion_name, description, name, surname, patronymic, price)
         return HttpResponse("Harosh")
     else:
-        if request.session['role'] > 1:
-            form = createExcursionForm()
-        else:
-            return redirect('/home')
-    return render(request, '../templates/excursions/create_excursion.html', {'form': form})
+        return render(request, '../templates/excursions/create_excursion.html',
+                      {'form': form, 'guides': guides})
 
 
 

@@ -1,3 +1,7 @@
+truncate table guides cascade;
+truncate table sights cascade;
+truncate table excursions cascade;
+
 insert into guides values (1, 'Аркадий', 'Искаков', 'Муратович',
 						   'История 20 века', 'Закончил вуз в Казахстане, проходил повышение квалификации в Москве', 12);
 insert into guides values (2, 'Дмитрий', 'Куликов', 'Алексеевич',

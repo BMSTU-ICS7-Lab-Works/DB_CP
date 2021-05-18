@@ -62,3 +62,6 @@ class GuidesRepository:
 
     def findGuideById(self, id):
         return self.session.query(Guides).filter(Guides.id == id).first()
+
+    def getAllGuides(self):
+        return self.session.query(Guides).all()
