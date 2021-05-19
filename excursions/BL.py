@@ -1,10 +1,8 @@
-from .models import Sights, Excursions, SightsExcursions, Guides
-from .excursions_repositories import SightsRepository, ExcursionsRepository, GuidesRepository
+from .models import Excursions, SightsExcursions
+from guides.guides_repositories import GuidesRepository
+from .excursions_repositories import ExcursionsRepository, SightsExcursionsRepository
 
-
-def addSight(name, build_date, type, author, description):
-    sightRep = SightsRepository(2)
-    sightRep.addSight(Sights(name, build_date, type, author, description))
+from sights.BL import getSightbyId
 
 
 def addExcursion(name, description, guide_name, guide_surname, guide_patronymic, price):
@@ -14,18 +12,19 @@ def addExcursion(name, description, guide_name, guide_surname, guide_patronymic,
     excursionRep.addExcursion(Excursions(name, description, guide.id, price))
 
 
-def addGuide(first_name, last_name, patronymic, qualification, biography, experience):
-    guideRep = GuidesRepository(2)
-    guideRep.addGuide(Guides(first_name, last_name, patronymic, qualification, biography, experience))
-
 def getAllExcursions():
     excursionRep = ExcursionsRepository(2)
     return excursionRep.getAllExcursions()
 
-def getGuideById(id):
-    guideRep = GuidesRepository(2)
-    return guideRep.findGuideById(id)
+def getSightsbyExcursion(excursion):
+    SERep = SightsExcursionsRepository(2)
+    res = SERep.getSightsbyExcursion(excursion)
 
-def getAllGuides():
-    guidesRep = GuidesRepository(2)
-    return guidesRep.getAllGuides()
+    fres = []
+    for el in res:
+        for id in el:
+            fres.append(getSightbyId(id))
+    return fres
+
+
+

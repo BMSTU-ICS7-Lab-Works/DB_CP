@@ -17,13 +17,17 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
 from django.views.generic.base import TemplateView
+from . import views
 
 urlpatterns = [
     path('excursions/', include('excursions.urls')),
     path('accounts/', include('accounts.urls')),
-    path('home/', TemplateView.as_view(template_name='../templates/home.html'), name='home'),
-    path('admin/', admin.site.urls),
-    path('about/', TemplateView.as_view(template_name='../templates/about.html'), name='about')
+    path('guides/', include('guides.urls')),
+    path('sights/', include('sights.urls')),
+    path('home/', views.home, name='home'),
+    #path('admin/', admin.site.urls),
+    path('about/', TemplateView.as_view(template_name='../templates/about.html'), name='about'),
+    path('success/', TemplateView.as_view(template_name='../templates/success.html'), name='success')
 
 ]
 urlpatterns += staticfiles_urlpatterns()

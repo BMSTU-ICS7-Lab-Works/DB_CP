@@ -25,21 +25,30 @@
     <th>Описание</th>
     <th>Гид</th>
     <th>Цена</th>
+    <th>Список достопримечательностей</th>
     <th>Добавить</th>
 </tr>
 </thead>
 <tbody>
 {% for r in excursions %}
 <tr>
+
     <td class="excursion_name"> {{ r.name }}</td>
     <td> {{ r.description }}</td>
-    <td> {{ r.guide }}</td>
+    <td> <a href="{% url 'guide_detail' guide_fio=r.guide %}">{{ r.guide }}</a></td>
     <td> {{ r.price }}</td>
-    <td><button class="addButton">Добавить</button></td>
+
+    {% for sight in sights %}
+        {% if forloop.parentloop.counter == forloop.counter %}
+        <td> {% for s in sight %} <a href="{% url 'sight_detail' sight_id=s.id %}">{{s.name}}</a> {% endfor %}</td>
+        {% endif %}
+    {% endfor %}
+    <td><button class="addButton" id="addBtn">Добавить</button></td>
 </tr>
 {% endfor %}
 </tbody>
 </table>
+<p id="sum">Текущая сумма: 0</p>
 {% csrf_token %}
 <button type="submit" class="sendButton">Купить</button>
 {% endblock %}

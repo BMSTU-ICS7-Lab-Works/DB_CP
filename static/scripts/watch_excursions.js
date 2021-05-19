@@ -1,4 +1,5 @@
 var res = [];
+var sum = 0;
 
 function clearstr(str)
 {
@@ -8,10 +9,10 @@ function clearstr(str)
   return str
 }
 
+//sum.innerText = "Aboba"
+
 $(document).ready(function() {
-
   var table = $('#myTable').DataTable();
-
 
   $(".addButton").click(function () {
     var $row = $(this).closest("tr");    // Find the row
@@ -19,8 +20,10 @@ $(document).ready(function() {
     $text.pop()
     for (let i = 0; i < $text.length; i++)
       $text[i] = clearstr($text[i])
-
     res.push($text)
+    sum += parseInt($text[3])
+    document.getElementById('sum').innerText = "Текущая сумма: " + sum;
+    this.disabled=true
   });
 
 

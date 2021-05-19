@@ -3,6 +3,7 @@ import os
 from .models import Users
 from.account_repositories import UsersRepository
 
+
 def get_hashed_password(password, salt=None):
     if salt is None:
         salt = os.urandom(32)
@@ -46,3 +47,9 @@ def addUser(username, password):
     key, salt = get_hashed_password(password)
     userRep = UsersRepository(0)
     userRep.addUser(Users(username, key.hex(), salt.hex(), 1))
+
+
+def get_user(username):
+    userRep = UsersRepository(0)
+    return userRep.findUserByName(username)
+

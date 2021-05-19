@@ -1,0 +1,9 @@
+<!-- templates/success.html-->
+{% extends 'base.html' %}
+
+{% block title %}Success{% endblock %}
+
+{% block content %}
+<p>Операция успешно выполнена!</p>
+<a href="{% url 'home' %}">Вернуться на домашнюю страницу</a>
+{% endblock %}

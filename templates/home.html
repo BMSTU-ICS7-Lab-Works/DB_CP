@@ -5,10 +5,12 @@
 
 {% block content %}
 {% if request.session.role == 1 or request.session.role == 2%}
-  Hi ABOBA!
+  <p>Привет пользователь!</p>
   <p><a href="{% url 'logout' %}">Log Out</a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">Log In</a>
+    <p>or</p>
+    <a href="{% url 'registration' %}">Зарегистрироваться</a>
 {% endif %}
 {% endblock %}

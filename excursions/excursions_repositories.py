@@ -1,23 +1,5 @@
 from DB_CP.sessionmanager import SessionManager
-from .models import Sights, Excursions, SightsExcursions, Guides
-
-
-class SightsRepository:
-    def __init__(self, role):
-        self.role = role
-        session_manager = SessionManager()
-        session_manager.setRole(role)
-        self.session = session_manager.getSession()
-
-    def __del__(self):
-        self.session.close()
-
-    def findSightByName(self, name):
-        return self.session.query(Sights).filter(Sights.name == name).first()
-
-    def addSight(self, sight):
-        self.session.add(sight)
-        self.session.commit()
+from .models import Excursions, SightsExcursions
 
 
 class ExcursionsRepository:
@@ -40,9 +22,7 @@ class ExcursionsRepository:
     def getAllExcursions(self):
         return self.session.query(Excursions).all()
 
-
-
-class GuidesRepository:
+class SightsExcursionsRepository:
     def __init__(self, role):
         self.role = role
         session_manager = SessionManager()
@@ -52,16 +32,12 @@ class GuidesRepository:
     def __del__(self):
         self.session.close()
 
-    def findGuideByFIO(self, name, surname, patronymic):
-        return self.session.query(Guides).filter(Guides.first_name == name).filter(Guides.last_name == surname)\
-            .filter(Guides.patronymic == patronymic).first()
+    # def addGuide(self, guide):
+    #     self.session.add(guide)
+    #     self.session.commit()
+    #
+    # def findGuideById(self, id):
+    #     return self.session.query(Guides).filter(Guides.id == id).first()
 
-    def addGuide(self, guide):
-        self.session.add(guide)
-        self.session.commit()
-
-    def findGuideById(self, id):
-        return self.session.query(Guides).filter(Guides.id == id).first()
-
-    def getAllGuides(self):
-        return self.session.query(Guides).all()
+    def getSightsbyExcursion(self, excursion):
+        return self.session.query(SightsExcursions).filter_by(excursionsId = excursion.id).with_entities(SightsExcursions.c.sightsId).all()
