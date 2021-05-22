@@ -1,0 +1,22 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}ExcursionAdd{% endblock %}
+
+{% block content %}
+<h2>Add Sight to Excursion</h2>
+    {% if request.flag == 1 %}
+        <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+            <p>Нету достопримечательности?</p>
+            <a href="{% url 'createSight' %}">Добавить</a>
+    <br>
+    <br>
+      <button type="submit">продолжить</button>
+    </form>
+    {% else %}
+        <p>Вы забежали вперед!!!</p>
+    {% endif %}
+
+{% endblock %}

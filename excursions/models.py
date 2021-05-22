@@ -1,5 +1,5 @@
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, DATE, ForeignKey, create_engine, Table
+from sqlalchemy import Column, Integer, String, DateTime, Date, ForeignKey, create_engine, Table
 from sqlalchemy.ext.declarative import declarative_base
 
 admin_engine = create_engine("postgresql+psycopg2://postgres:1@localhost/Excursions")
@@ -11,6 +11,13 @@ SightsExcursions = Table('SightsExcursions', Base.metadata,
       ForeignKey('sights.id', ondelete='cascade')),
     Column('excursionsId', Integer,
         ForeignKey('excursions.id', ondelete='cascade')))
+
+SelectedExcursions = Table('SelectedExcursions', Base.metadata,
+    Column('userId', Integer,
+      ForeignKey('users.id', ondelete='cascade')),
+    Column('scheduleId', Integer,
+        ForeignKey('schedule.id', ondelete='cascade')),
+    Column('date', Date))
 
 
 class Excursions(Base):
@@ -30,6 +37,23 @@ class Excursions(Base):
 
     def __repr__(self):
         return "%s, %s, %s, %s" % (self.name, self.description, self.guide, self.price)
+
+
+class Schedule(Base):
+    __tablename__ = 'schedule'
+    id = Column(Integer, primary_key=True)
+    excursion = Column(Integer, ForeignKey('excursions.id'))
+    day = Column(String)
+    time = Column(DateTime)
+
+    def __init__(self, excursion, day, time):
+        self.excursion = excursion
+        self.day = day
+        self.time = time
+
+    def __repr__(self):
+        return "%s, %s, %s" % (self.excursion, self.day, self.time)
+
 
 if __name__ == '__main__':
     Base.metadata.create_all(admin_engine)

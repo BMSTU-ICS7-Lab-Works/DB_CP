@@ -4,12 +4,11 @@ from sqlalchemy import event
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy import Column, Integer, String, DATE, ForeignKey, create_engine, Table
-from sqlalchemy.ext.declarative import declarative_base
+from excursions.models import Base
 import os
 import hashlib
 
 admin_engine = create_engine("postgresql+psycopg2://postgres:1@localhost/Excursions")
-Base = declarative_base()
 
 class Users(Base):
     __tablename__ = 'users'
@@ -31,16 +30,16 @@ class Users(Base):
 
 if __name__ == '__main__':
     Base.metadata.create_all(admin_engine)
-    Session = sessionmaker(bind=admin_engine)
-    session = Session()
-
-    salt = os.urandom(32)  # Запомните
-    password = 'gbgtnrf1'
-    key = hashlib.pbkdf2_hmac(
-        'sha256',
-        password.encode('utf-8'),
-        salt,
-        100000)
-    admin_user = Users('admin', key.hex(), salt.hex(), 2)
-    session.add(admin_user)
-    session.commit()
+    # Session = sessionmaker(bind=admin_engine)
+    # session = Session()
+    #
+    # salt = os.urandom(32)  # Запомните
+    # password = 'gbgtnrf1'
+    # key = hashlib.pbkdf2_hmac(
+    #     'sha256',
+    #     password.encode('utf-8'),
+    #     salt,
+    #     100000)
+    # admin_user = Users('admin', key.hex(), salt.hex(), 2)
+    # session.add(admin_user)
+    # session.commit()

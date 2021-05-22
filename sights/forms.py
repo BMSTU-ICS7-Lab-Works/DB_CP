@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 
 class createSightForm(forms.Form):
@@ -11,3 +13,6 @@ class createSightForm(forms.Form):
         date = self.cleaned_data['build_date']
         if date > datetime.date.today():
             raise forms.ValidationError('Invalid build date')
+
+class sightsChooseForm(forms.Form):
+    description = forms.CharField(widget=forms.Textarea)
