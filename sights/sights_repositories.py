@@ -18,6 +18,9 @@ class SightsRepository:
     def findSightById(self, id):
         return self.session.query(Sights).filter(Sights.id == id).first()
 
+    def findAllSights(self):
+        return self.session.query(Sights).all()
+
     def addSight(self, sight):
         self.session.add(sight)
         self.session.commit()

@@ -1,22 +1,52 @@
-<!-- templates/registration/login.html -->
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}ExcursionAdd{% endblock %}
 
 {% block content %}
-<h2>Add Sight to Excursion</h2>
-    {% if request.flag == 1 %}
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+        <script src="{% static "scripts/watch_sights.js" %}" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <h2>Add Sight to Excursion</h2>
+        <h2>Sight table</h2>
+        <p>Название вашей экскурсии</p>
+        <p id="excursion_name">{{excursion_name}}</p>
+        <table id=myTable class="display">
+        <thead>
+        <tr class="header">
+            <th>Название</th>
+            <th>Дата постройки</th>
+            <th>Тип</th>
+            <th>Автор</th>
+            <th>Описание</th>
+            <th>Добавить</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for s in sights %}
+        <tr>
+
+            <td> {{ s.name }}</td>
+            <td> {{ s.build_date }}</td>
+            <td> {{ s.type }}</td>
+            <td> {{ s.author }}</td>
+            <td> {{ s.description }}</td>
+
+            <td><button class="addButton" id="addBtn">Добавить</button></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
         <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-            <p>Нету достопримечательности?</p>
-            <a href="{% url 'createSight' %}">Добавить</a>
-    <br>
-    <br>
-      <button type="submit">продолжить</button>
-    </form>
-    {% else %}
-        <p>Вы забежали вперед!!!</p>
-    {% endif %}
+        {% csrf_token %}
+       <button type="submit" class="sendButton">Добавить</button>
+        </form>
+    </body>
 
 {% endblock %}

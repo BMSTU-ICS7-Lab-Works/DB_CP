@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .BL import filltime
 import datetime
 
 class createExcursionForm(forms.Form):
@@ -17,3 +18,13 @@ class createExcursionForm(forms.Form):
     description = forms.CharField(widget=forms.Textarea)
     price = forms.IntegerField()
     guides = forms.ChoiceField()
+
+class scheduleSelectForm(forms.Form):
+    Понедельник = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+    Вторник = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+    Среда = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+    Четверг = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+    Пятница = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+    Суббота = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+    Воскресенье = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+

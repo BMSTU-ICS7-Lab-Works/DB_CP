@@ -1,6 +1,7 @@
 truncate table guides cascade;
 truncate table sights cascade;
 truncate table excursions cascade;
+truncate table "SightsExcursions" cascade;
 
 insert into guides values (1, 'Аркадий', 'Искаков', 'Муратович',
 						   'История 20 века', 'Закончил вуз в Казахстане, проходил повышение квалификации в Москве', 12);
@@ -22,8 +23,9 @@ insert into excursions values (2, 'Неизведанная Таганка', 'М
 							   премию Королевского института британских архитекторов.', 2, 3000);
 
 insert into sights values (1, 'Храм Василия Блаженного', '02-10-1552', 'Шатровый храм', 'Постник Яковлев', 'православный \
-                                                     храм на Красной площади в Москве, памятник русской архитектуры.')
-
+                                                     храм на Красной площади в Москве, памятник русской архитектуры.');
+insert into sights values (2, 'Памятник Петру 1', '02-02-1997', 'Памятник', 'Зураб Константинович Церетели', 'Один из самых \
+						   высоких памятников в России. Общая высота памятника 98 метров, высота фигуры Петра 18 м.');
 
 INSERT INTO public."SightsExcursions"(
 	"sightsId", "excursionsId")
@@ -32,3 +34,13 @@ INSERT INTO public."SightsExcursions"(
 INSERT INTO public."SightsExcursions"(
 	"sightsId", "excursionsId")
 	VALUES (1, 1);
+
+INSERT INTO public."SightsExcursions"(
+	"sightsId", "excursionsId")
+	VALUES (2, 1);
+	
+select * from excursions;
+select * from sights;
+select * from "SightsExcursions";
+select * from "SelectedExcursions";
+select * from schedule;

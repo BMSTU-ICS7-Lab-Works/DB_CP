@@ -44,7 +44,7 @@ class Schedule(Base):
     id = Column(Integer, primary_key=True)
     excursion = Column(Integer, ForeignKey('excursions.id'))
     day = Column(String)
-    time = Column(DateTime)
+    time = Column(String)
 
     def __init__(self, excursion, day, time):
         self.excursion = excursion
