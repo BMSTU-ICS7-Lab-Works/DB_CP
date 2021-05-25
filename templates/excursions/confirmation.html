@@ -1,0 +1,14 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Confirmation{% endblock %}
+
+{% block content %}
+<h2>Confirmation</h2>
+<form method="post">
+<p>Введите ваши данные и через некоторое время с вами свяжутся для уточнения заказа.</p>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Отправить данные</button>
+</form>
+{% endblock %}

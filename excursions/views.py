@@ -1,7 +1,7 @@
 import simplejson as simplejson
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import createExcursionForm, scheduleSelectForm, timeSelectForm
+from .forms import createExcursionForm, scheduleSelectForm, confirmationForm
 from json import dumps
 
 from .BL import *
@@ -130,8 +130,13 @@ def watch_excursions(request):
                     print(sched_date)
                     addSelectedExcursionsRel(user.id, sched_id, sched_date)
                 i += 1
-        return redirect('success')
+        return redirect('confirmation')
 
-def chooseSchedule(request, excursion_name):
-    schedule = getScheduleByExcursion(excursion_name)
-    return render(request, '../templates/excursions/choose_schedule.html', {'schedule':schedule})
+
+def confirmation(request):
+    if request.method == 'GET':
+        form = confirmationForm()
+        return render(request, '../templates/excursions/confirmation.html',
+                      {'form':form})
+    else:
+        return redirect('success')

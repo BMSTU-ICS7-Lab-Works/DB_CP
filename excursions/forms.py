@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .BL import filltime
+from phonenumber_field.formfields import PhoneNumberField
+
 import datetime
 
 class createExcursionForm(forms.Form):
@@ -41,4 +43,9 @@ class scheduleSelectForm(forms.Form):
     Суббота = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
     Воскресенье = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
 
+
+
+class confirmationForm(forms.Form):
+    name = forms.CharField()
+    phone = PhoneNumberField()
 
