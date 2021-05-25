@@ -19,6 +19,19 @@ class createExcursionForm(forms.Form):
     price = forms.IntegerField()
     guides = forms.ChoiceField()
 
+
+class timeSelectForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.times = kwargs.pop('time')
+        super(timeSelectForm, self).__init__(*args, **kwargs)
+        schedule = []
+        for i in range(len(self.times)):
+            time = self.times[i]
+            schedule.append((i+1, time.day + ' ' + time.time))
+
+        self.fields['time'] = forms.ChoiceField(choices=schedule)
+    time = forms.ChoiceField()
+
 class scheduleSelectForm(forms.Form):
     Понедельник = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
     Вторник = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
@@ -27,4 +40,5 @@ class scheduleSelectForm(forms.Form):
     Пятница = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
     Суббота = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
     Воскресенье = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
+
 

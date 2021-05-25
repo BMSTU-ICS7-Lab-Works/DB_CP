@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Watch_excursions{% endblock %}
+
+{% block content %}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static "scripts/schedule_choose.js" %}" type="text/javascript"></script>
+</head>
+
+<body>
+
+<h2>Schedule table</h2>
+<table id=myTable class="display">
+<thead>
+<tr class="header">
+    <th>День</th>
+    <th>Время</th>
+    <th>Выбрать</th>
+</tr>
+</thead>
+<tbody>
+{% for s in schedule %}
+<tr>
+    <td>{{ s.day }}</td>
+    <td>{{ s.time }}</td>
+    <td><button class="addButton" id="addBtn">Выбрать</button></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<p>Выберите дату: <input type="text" id="datepicker"></p>
+{% csrf_token %}
+<button type="submit" class="sendButton">Купить</button>
+{% endblock %}

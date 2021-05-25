@@ -11,6 +11,7 @@ def login(request):
         if form.is_valid():
             username = request.POST.get('username')
             request.session['role'] = get_role(username)
+            request.session['username'] = username
             return redirect('/success')
     else:
         form = LoginForm()
@@ -19,6 +20,7 @@ def login(request):
 
 def logout(request):
     request.session['role'] = 0
+    request.session['username'] = ''
     return redirect('/success')
 
 
@@ -30,6 +32,7 @@ def registration(request):
             password = request.POST.get('password')
             addUser(username, password)
             request.session['role'] = 1
+            request.session['username'] = username
             return redirect('/success')
     else:
         form = RegistrateForm()

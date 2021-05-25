@@ -1,6 +1,6 @@
 from .models import Excursions, Schedule
 from guides.guides_repositories import GuidesRepository
-from .excursions_repositories import ExcursionsRepository, SightsExcursionsRepository, ScheduleRepository
+from .excursions_repositories import ExcursionsRepository, SightsExcursionsRepository, ScheduleRepository, SelectedExcursionsRepository
 
 from sights.BL import getSightbyId
 
@@ -15,6 +15,10 @@ def addSchedule(excursion_id, date, time):
     scheduleRep = ScheduleRepository(2)
     scheduleRep.addSchedule(Schedule(excursion_id, date, time))
 
+def addSelectedExcursionsRel(userId, scheduleId, date):
+    selectedRep = SelectedExcursionsRepository(2)
+    selectedRep.addRel(userId, scheduleId, date)
+
 def addSightExcursionRel(sight_id, exc_id):
     SightsExcursionsRep = SightsExcursionsRepository(2)
     SightsExcursionsRep.addRel(sight_id, exc_id)
@@ -23,6 +27,11 @@ def getExcursionByName(name):
     excursionsRep = ExcursionsRepository(2)
     return excursionsRep.findExcursionByName(name)
 
+
+def getScheduleByExcursion(excursion_name):
+    excursion = getExcursionByName(excursion_name)
+    ScheduleRep = ScheduleRepository(2)
+    return ScheduleRep.findScheduleByExcursion(excursion)
 
 def getAllExcursions():
     excursionRep = ExcursionsRepository(2)

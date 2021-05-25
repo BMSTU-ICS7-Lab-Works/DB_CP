@@ -1,10 +1,13 @@
+import simplejson as simplejson
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import createExcursionForm, scheduleSelectForm
+from .forms import createExcursionForm, scheduleSelectForm, timeSelectForm
+from json import dumps
 
 from .BL import *
 from guides.BL import *
 from sights.BL import getAllSights, addSight, getSightbyName
+from accounts.password import getUser
 import datetime
 
 
@@ -23,7 +26,7 @@ def addBasisToExcursion(request):
         excursion_name = request.POST.get("name")
         description = request.POST.get("description")
         guide_num = request.POST['guides']
-        guide = guides[int(guide_num)]
+        guide = guides[int(guide_num) - 1]
         name = guide.first_name
         surname = guide.last_name
         patronymic = guide.patronymic
@@ -52,7 +55,9 @@ def addSightToExcursion(request, excursion_name):
 
                 exc = getExcursionByName(excursion_name)
                 sight = getSightbyName(sight_name)
-                addSightExcursionRel(exc.id, sight.id)
+                print(sight.id)
+                print(exc.id)
+                addSightExcursionRel(int(sight.id), int(exc.id))
 
         return redirect('addScheduleToExcursion', excursion_name=excursion_name)
         #return redirect('/home')
@@ -93,12 +98,40 @@ def addScheduleToExcursion(request, excursion_name):
 def watch_excursions(request):
     excursions = getAllExcursions()
     sights = []
+    schedule = []
     for el in excursions:
         guide = getGuideById(el.guide)
+        #time = getTimeByExcId(el.id)
         el.guide = guide.first_name + " " + guide.last_name + " " + guide.patronymic
         sights.append(getSightsbyExcursion(el))
+        schedule.append(getScheduleByExcursion(el.name))
+    #timeform = timeSelectForm(time=time)
     if request.method == "GET":
-        return render(request, '../templates/excursions/watch_excursions.html', {'excursions': excursions, 'sights': sights})
+        return render(request, '../templates/excursions/watch_excursions.html',
+                      {'excursions': excursions, 'sights': sights, 'schedule': schedule})
     else:
-        print(request.POST)
-        return render(request, '../templates/excursions/watch_excursions.html', {'excursions': excursions, 'sights': sights})
+        i = 1
+        for el in request.POST:
+            if el != 'csrfmiddlewaretoken':
+                req = request.POST.getlist(el)
+                if i % 2:
+                    sched = getScheduleByExcursion(req[0])
+                    day, time = req[1].split(' ')
+                    for s in sched:
+                        if s.day == day and s.time == time:
+                            sched_id = s.id
+                            break
+                else:
+                    user = getUser(request.session['username'])
+                    sched_date = req
+                    sched_date[0] = sched_date[0].zfill(2)
+                    sched_date = ' '.join(sched_date)
+                    sched_date = datetime.datetime.strptime(sched_date, "%d %b %Y").date()
+                    print(sched_date)
+                    addSelectedExcursionsRel(user.id, sched_id, sched_date)
+                i += 1
+        return redirect('success')
+
+def chooseSchedule(request, excursion_name):
+    schedule = getScheduleByExcursion(excursion_name)
+    return render(request, '../templates/excursions/choose_schedule.html', {'schedule':schedule})

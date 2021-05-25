@@ -23,6 +23,6 @@ def createSight(request):
     return render(request, '../templates/sights/create_sight.html', {'form': form})
 
 def detail(request, sight_id):
-
-    #tut nado full stranicu gida bahnut auf
-    return HttpResponse("You're looking at %s." % sight_id)
+    sight = getSightbyId(sight_id)
+    return render(request, '../templates/sights/sight_page.html',
+                  {'sight': sight})

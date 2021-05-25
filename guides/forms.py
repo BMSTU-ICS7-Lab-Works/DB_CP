@@ -6,4 +6,7 @@ class createGuideForm(forms.Form):
     patronymic = forms.CharField()
     qualification = forms.CharField()
     biography = forms.CharField(widget=forms.Textarea)
-    experience = forms.IntegerField
+    experience = forms.IntegerField()
+
+
+

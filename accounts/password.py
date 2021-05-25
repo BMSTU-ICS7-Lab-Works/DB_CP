@@ -24,6 +24,12 @@ def find_user(username):
         return True
 
 
+def getUser(username):
+    userRep = UsersRepository(0)
+    return userRep.findUserByName(username)
+
+
+
 def check_user_login(username, password):
     userRep = UsersRepository(0)
     fuser = userRep.findUserByName(username)
@@ -49,7 +55,4 @@ def addUser(username, password):
     userRep.addUser(Users(username, key.hex(), salt.hex(), 1))
 
 
-def get_user(username):
-    userRep = UsersRepository(0)
-    return userRep.findUserByName(username)
 

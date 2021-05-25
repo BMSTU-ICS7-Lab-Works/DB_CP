@@ -1,0 +1,14 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Sight page{% endblock %}
+
+{% block content %}
+<h>Это страница достопримечательности</h>
+<p>Название: {{ sight.name }}</p>
+<p>Дата постройки: {{ sight.build_date }}</p>
+<p>Тип: {{ sight.type }}</p>
+<p>Автор: {{ sight.author }}</p>
+<p>Описание: {{ sight.description }}</p>
+
+{% endblock %}

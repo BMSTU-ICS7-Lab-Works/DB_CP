@@ -11,9 +11,8 @@ def detail(request, guide_fio):
     surname = guide_fio[1]
     patronymic = guide_fio[2]
     guide = getGuidebyFIO(name, surname, patronymic)
-    print(guide)
-    #tut nado full stranicu gida bahnut auf
-    return HttpResponse("You're looking at %s." % guide.first_name)
+    return render(request, '../templates/guides/guide_page.html',
+                          {'guide': guide})
 
 
 def createGuide(request):

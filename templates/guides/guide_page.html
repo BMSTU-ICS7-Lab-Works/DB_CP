@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!-- templates/home.html-->
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Guide page{% endblock %}
+
+{% block content %}
+<h>Это страница гида</h>
+<p>Имя: {{ guide.first_name }}</p>
+<p>Фамилия: {{ guide.last_name }}</p>
+<p>Отчество: {{ guide.patronymic }}</p>
+<p>Квалификация: {{ guide.qualification }}</p>
+<p>Биография: {{ guide.biography }}</p>
+<p>Опыт: {{ guide.experience }} лет</p>
+
+{% endblock %}
