@@ -9,7 +9,7 @@ class LoginForm(forms.Form):
     def clean_password(self):
         username = self.cleaned_data['username']
         password = self.cleaned_data['password']
-        if not check_user_login(username, password):
+        if not check_user_login(username, password, 3):
             raise forms.ValidationError('Incorrect username or password!')
 
 
@@ -20,7 +20,7 @@ class RegistrateForm(forms.Form):
 
     def clean_username(self):
         username = self.cleaned_data['username']
-        if find_user(username):
+        if find_user(username, 3):
             raise forms.ValidationError('User with this name already exists!')
 
     def clean_repeat_password(self):

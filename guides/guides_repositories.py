@@ -1,5 +1,5 @@
 from DB_CP.sessionmanager import SessionManager
-from .models import Guides
+from excursions.models import Guides
 
 class GuidesRepository:
     def __init__(self, role):

@@ -1,5 +1,5 @@
 from DB_CP.sessionmanager import SessionManager
-from .models import Sights
+from excursions.models import Sights
 
 
 class SightsRepository:

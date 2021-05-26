@@ -4,8 +4,8 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if request.session.role == 1 or request.session.role == 2%}
-  <p>Привет пользователь!</p>
+{% if request.session.role == 1 or request.session.role == 2 or request.session.role == 3%}
+  <p>Привет {{ request.session.username }}!</p>
   <a href="{% url 'logout' %}">Log Out</a>
     <a href="{% url 'watch_excursions' %}">Перейтии к покупке экскурсий</a>
 {% else %}

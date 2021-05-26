@@ -30,7 +30,7 @@ def registration(request):
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
-            addUser(username, password)
+            addUser(username, password, request.session['role'])
             request.session['role'] = 1
             request.session['username'] = username
             return redirect('/success')

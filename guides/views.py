@@ -10,7 +10,7 @@ def detail(request, guide_fio):
     name = guide_fio[0]
     surname = guide_fio[1]
     patronymic = guide_fio[2]
-    guide = getGuidebyFIO(name, surname, patronymic)
+    guide = getGuidebyFIO(name, surname, patronymic, request.session['role'])
     return render(request, '../templates/guides/guide_page.html',
                           {'guide': guide})
 
@@ -25,7 +25,7 @@ def createGuide(request):
         biography = request.POST.get("biography")
         experience = request.POST.get("experience")
 
-        addGuide(first_name, last_name, patronymic, qualification, biography, experience)
+        addGuide(first_name, last_name, patronymic, qualification, biography, experience, request.session['role'])
         return redirect('/success')
     else:
         if request.session['role'] > 1:

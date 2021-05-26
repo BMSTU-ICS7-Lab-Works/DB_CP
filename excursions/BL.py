@@ -5,40 +5,40 @@ from .excursions_repositories import ExcursionsRepository, SightsExcursionsRepos
 from sights.BL import getSightbyId
 
 
-def addExcursion(name, description, guide_name, guide_surname, guide_patronymic, price):
-    guideRep = GuidesRepository(2)
+def addExcursion(name, description, guide_name, guide_surname, guide_patronymic, price, role):
+    guideRep = GuidesRepository(role)
     guide = guideRep.findGuideByFIO(guide_name, guide_surname, guide_patronymic)
-    excursionRep = ExcursionsRepository(2)
+    excursionRep = ExcursionsRepository(role)
     excursionRep.addExcursion(Excursions(name, description, guide.id, price))
 
-def addSchedule(excursion_id, date, time):
-    scheduleRep = ScheduleRepository(2)
+def addSchedule(excursion_id, date, time, role):
+    scheduleRep = ScheduleRepository(role)
     scheduleRep.addSchedule(Schedule(excursion_id, date, time))
 
-def addSelectedExcursionsRel(userId, scheduleId, date):
-    selectedRep = SelectedExcursionsRepository(2)
+def addSelectedExcursionsRel(userId, scheduleId, date, role):
+    selectedRep = SelectedExcursionsRepository(role)
     selectedRep.addRel(userId, scheduleId, date)
 
-def addSightExcursionRel(sight_id, exc_id):
-    SightsExcursionsRep = SightsExcursionsRepository(2)
+def addSightExcursionRel(sight_id, exc_id, role):
+    SightsExcursionsRep = SightsExcursionsRepository(role)
     SightsExcursionsRep.addRel(sight_id, exc_id)
 
-def getExcursionByName(name):
-    excursionsRep = ExcursionsRepository(2)
+def getExcursionByName(name, role):
+    excursionsRep = ExcursionsRepository(role)
     return excursionsRep.findExcursionByName(name)
 
 
-def getScheduleByExcursion(excursion_name):
-    excursion = getExcursionByName(excursion_name)
-    ScheduleRep = ScheduleRepository(2)
+def getScheduleByExcursion(excursion_name, role):
+    excursion = getExcursionByName(excursion_name, role)
+    ScheduleRep = ScheduleRepository(role)
     return ScheduleRep.findScheduleByExcursion(excursion)
 
-def getAllExcursions():
-    excursionRep = ExcursionsRepository(2)
+def getAllExcursions(role):
+    excursionRep = ExcursionsRepository(role)
     return excursionRep.findAllExcursions()
 
-def getSightsbyExcursion(excursion):
-    SERep = SightsExcursionsRepository(2)
+def getSightsbyExcursion(excursion, role):
+    SERep = SightsExcursionsRepository(role)
     res = SERep.getSightsbyExcursion(excursion)
 
     fres = []

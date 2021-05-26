@@ -13,7 +13,7 @@ def createSight(request):
             author = request.POST.get("author")
             description = request.POST.get("description")
 
-            addSight(name, build_date, type, author, description)
+            addSight(name, build_date, type, author, description, request.session['role'])
             return redirect('/success')
     else:
         if request.session['role'] > 1:
@@ -23,6 +23,6 @@ def createSight(request):
     return render(request, '../templates/sights/create_sight.html', {'form': form})
 
 def detail(request, sight_id):
-    sight = getSightbyId(sight_id)
+    sight = getSightbyId(sight_id, request.session['role'])
     return render(request, '../templates/sights/sight_page.html',
                   {'sight': sight})

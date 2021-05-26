@@ -1,5 +1,5 @@
 from DB_CP.sessionmanager import SessionManager
-from .models import Users
+from excursions.models import Users
 
 
 class UsersRepository:

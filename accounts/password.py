@@ -1,6 +1,6 @@
 import hashlib
 import os
-from .models import Users
+from excursions.models import Users
 from.account_repositories import UsersRepository
 
 
@@ -16,22 +16,22 @@ def get_hashed_password(password, salt=None):
     return key, salt
 
 
-def find_user(username):
-    userRep = UsersRepository(0)
+def find_user(username, role):
+    userRep = UsersRepository(role)
     if userRep.findUserByName(username) is None:
         return False
     else:
         return True
 
 
-def getUser(username):
-    userRep = UsersRepository(0)
+def getUser(username, role):
+    userRep = UsersRepository(role)
     return userRep.findUserByName(username)
 
 
 
-def check_user_login(username, password):
-    userRep = UsersRepository(0)
+def check_user_login(username, password, role):
+    userRep = UsersRepository(role)
     fuser = userRep.findUserByName(username)
     if fuser is None:
         return False
@@ -44,14 +44,14 @@ def check_user_login(username, password):
 
 
 def get_role(username):
-    userRep = UsersRepository(0)
+    userRep = UsersRepository(3)
     fuser = userRep.findUserByName(username)
     return fuser.role
 
 
-def addUser(username, password):
+def addUser(username, password, role):
     key, salt = get_hashed_password(password)
-    userRep = UsersRepository(0)
+    userRep = UsersRepository(role)
     userRep.addUser(Users(username, key.hex(), salt.hex(), 1))
 
 
