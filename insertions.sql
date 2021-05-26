@@ -44,3 +44,12 @@ select * from sights;
 select * from "SightsExcursions";
 select * from "SelectedExcursions";
 select * from schedule;
+select * from users
+
+drop table users cascade;
+drop table excursions cascade;
+drop table guides cascade;
+drop table schedule cascade;
+drop table sights cascade;
+drop table "SightsExcursions" cascade;
+drop table "SelectedExcursions" cascade;
