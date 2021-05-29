@@ -51,7 +51,7 @@ def get_role(username):
 
 def addUser(username, password, role):
     key, salt = get_hashed_password(password)
-    userRep = UsersRepository(role)
+    userRep = UsersRepository(3)
     userRep.addUser(Users(username, key.hex(), salt.hex(), 1))
 
 

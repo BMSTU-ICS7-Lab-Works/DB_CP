@@ -44,8 +44,12 @@ def getSightsbyExcursion(excursion, role):
     fres = []
     for el in res:
         for id in el:
-            fres.append(getSightbyId(id))
+            fres.append(getSightbyId(id, role))
     return fres
+
+def delPastExcursions(role):
+    ScheduleRep = ScheduleRepository(role)
+    return ScheduleRep.deletePastExcursions()
 
 
 

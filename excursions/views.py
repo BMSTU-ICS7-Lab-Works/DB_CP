@@ -96,6 +96,7 @@ def addScheduleToExcursion(request, excursion_name):
             return redirect('home')
 
 def watch_excursions(request):
+    print(request.session['role'])
     excursions = getAllExcursions(request.session['role'])
     sights = []
     schedule = []
@@ -128,7 +129,7 @@ def watch_excursions(request):
                     sched_date = ' '.join(sched_date)
                     sched_date = datetime.datetime.strptime(sched_date, "%d %b %Y").date()
                     print(sched_date)
-                    addSelectedExcursionsRel(user.id, sched_id, sched_date)
+                    addSelectedExcursionsRel(user.id, sched_id, sched_date, request.session['role'])
                 i += 1
         return redirect('confirmation')
 
@@ -140,3 +141,9 @@ def confirmation(request):
                       {'form':form})
     else:
         return redirect('success')
+
+
+def deletePastExcursions(request):
+    if request.method == 'POST':
+        delPastExcursions(request.session['role'])
+    return redirect('home')

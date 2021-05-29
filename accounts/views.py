@@ -31,8 +31,8 @@ def registration(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
             addUser(username, password, request.session['role'])
-            request.session['role'] = 1
             request.session['username'] = username
+            request.session['role'] = 1
             return redirect('/success')
     else:
         form = RegistrateForm()

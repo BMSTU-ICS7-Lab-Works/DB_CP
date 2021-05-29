@@ -2,15 +2,37 @@
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
-
+{% load static %}
 {% block content %}
-{% if request.session.role == 1 or request.session.role == 2 or request.session.role == 3%}
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{% static "scripts/home.js" %}" type="text/javascript"></script>
+    </head>
+
+
+{% if request.session.role == 1%}
   <p>Привет {{ request.session.username }}!</p>
-  <a href="{% url 'logout' %}">Log Out</a>
-    <a href="{% url 'watch_excursions' %}">Перейтии к покупке экскурсий</a>
+    <p>Действия доступные тебе:</p>
+  <a href="{% url 'logout' %}">Выйти из аккаунта</a>
+    <a href="{% url 'watch_excursions' %}">Перейти к покупке экскурсий</a>
+{% elif request.session.role == 2%}
+    <p>Привет гид {{ request.session.username }}!</p>
+  <a href="{% url 'logout' %}">Выйти из аккаунта</a>
+    <a href="{% url 'watch_excursions' %}">Перейти к покупке экскурсий</a>
+    <a href="{% url 'createExcursion' %}">Перейти к созданию экскурсии</a>
+    <a href="{% url 'createSight' %}">Перейти к добавлению достопримечательности</a>
+{% elif request.session.role == 3%}
+    <p>Привет администратор {{ request.session.username }}!</p>
+    <a href="{% url 'logout' %}">Выйти из аккаунта</a>
+    <a href="{% url 'watch_excursions' %}">Перейти к покупке экскурсий</a>
+    <a href="{% url 'createExcursion' %}">Перейти к созданию экскурсии</a>
+    <a href="{% url 'createSight' %}">Перейти к добавлению достопримечательности</a>
+    <a href="{% url 'createGuide' %}">Перейти к добавлению гида</a>
+    <button id="deletePast">Удалить прошедшие экскурсии</button>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'login' %}">Войти в аккаунт</a>
     <p>or</p>
     <a href="{% url 'registration' %}">Зарегистрироваться</a>
 {% endif %}

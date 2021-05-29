@@ -9,4 +9,5 @@ urlpatterns = [
     path('create_excursion/schedule_add/<str:excursion_name>', views.addScheduleToExcursion, name='addScheduleToExcursion'),
     path('watch_excursions/', views.watch_excursions, name='watch_excursions'),
     path('watch_excursions/confirmation', views.confirmation, name='confirmation'),
+    path('delete/past', views.deletePastExcursions, name='deletePast'),
 ]
