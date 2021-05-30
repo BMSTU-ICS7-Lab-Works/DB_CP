@@ -4,6 +4,12 @@ from excursions.models import Users
 from.account_repositories import UsersRepository
 
 
+class Roles:
+    def __init__(self, rolenum, name):
+        self.rolenum = rolenum
+        self.name = name
+
+
 def get_hashed_password(password, salt=None):
     if salt is None:
         salt = os.urandom(32)
@@ -53,6 +59,14 @@ def addUser(username, password, role):
     key, salt = get_hashed_password(password)
     userRep = UsersRepository(3)
     userRep.addUser(Users(username, key.hex(), salt.hex(), 1))
+
+def updateUserRole(username, roleset, role):
+    userRep = UsersRepository(role)
+    userRep.changeRole(username, roleset)
+
+def getAllUsers(role):
+    userRep = UsersRepository(role)
+    return userRep.findAllUsers()
 
 
 

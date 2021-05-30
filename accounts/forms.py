@@ -1,5 +1,5 @@
 from django import forms
-from .password import *
+from .BL import *
 
 
 class LoginForm(forms.Form):

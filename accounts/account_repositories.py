@@ -18,3 +18,10 @@ class UsersRepository:
     def addUser(self, user):
         self.session.add(user)
         self.session.commit()
+
+    def changeRole(self, username, roleset):
+        self.session.query(Users).filter(Users.nickname == username).update({Users.role: roleset})
+        self.session.commit()
+
+    def findAllUsers(self):
+        return self.session.query(Users).all()

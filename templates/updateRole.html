@@ -1,0 +1,54 @@
+<!-- templates/success.html-->
+{% extends 'base.html' %}
+
+{% block title %}Role update{% endblock %}
+{% load static %}
+{% block content %}
+    <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+    <script src="{% static "scripts/role_set.js" %}" type="text/javascript"></script>
+</head>
+
+<h2>Excursions table</h2>
+<table id=myTable class="display">
+<thead>
+<tr class="header">
+    <th>Никнейм</th>
+    <th>Текущая роль</th>
+    <th>Новая роль</th>
+    <th>Установить</th>
+</tr>
+</thead>
+<tbody>
+{% for u in users %}
+<tr>
+
+    <td> {{ u.nickname }}</td>
+    {% if u.role == 1 %}
+        <td>Зарегистрированный пользователь</td>
+    {% elif u.role == 2 %}
+        <td>Гид</td>
+    {% elif u.role == 3 %}
+        <td>Админ</td>
+    {% endif %}
+    <td>
+    <select id="select_{{ forloop.counter }}">
+        {% for r in roles %}
+            <option value="{{ r.rolenum }} {{ r.name }}">{{ r.name }}</option>
+        {% endfor %}
+    </select>
+    </td>
+    <td><button class="setButton" id="setBtn">Установить</button></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<form method="post">
+{% csrf_token %}
+<button type="submit" class="sendButton">Вернуться на домашнюю страницу</button>
+</form>
+{% endblock %}

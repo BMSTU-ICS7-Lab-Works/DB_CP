@@ -7,7 +7,7 @@ from json import dumps
 from .BL import *
 from guides.BL import *
 from sights.BL import getAllSights, addSight, getSightbyName
-from accounts.password import getUser
+from accounts.BL import getUser
 import datetime
 
 
@@ -147,3 +147,4 @@ def deletePastExcursions(request):
     if request.method == 'POST':
         delPastExcursions(request.session['role'])
     return redirect('home')
+

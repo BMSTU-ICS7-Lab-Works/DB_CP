@@ -87,7 +87,7 @@ class ScheduleRepository:
         return self.session.query(Schedule).filter_by(excursion=excursion.id).all()
 
     def deletePastExcursions(self):
-        self.session.query(SelectedExcursions).filter(SelectedExcursions.c.date >= datetime.datetime.today().date()).delete()
+        self.session.query(SelectedExcursions).filter(SelectedExcursions.c.date < datetime.datetime.today().date()).delete()
         self.session.commit()
     #
     # def findGuideById(self, id):
