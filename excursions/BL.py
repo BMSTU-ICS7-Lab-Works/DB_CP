@@ -8,6 +8,7 @@ from sights.BL import getSightbyId
 def addExcursion(name, description, guide_name, guide_surname, guide_patronymic, price, role):
     guideRep = GuidesRepository(role)
     guide = guideRep.findGuideByFIO(guide_name, guide_surname, guide_patronymic)
+    del guideRep
     excursionRep = ExcursionsRepository(role)
     excursionRep.addExcursion(Excursions(name, description, guide.id, price))
 
@@ -50,8 +51,6 @@ def getSightsbyExcursion(excursion, role):
 def delPastExcursions(role):
     ScheduleRep = ScheduleRepository(role)
     return ScheduleRep.deletePastExcursions()
-
-
 
 
 def filltime():

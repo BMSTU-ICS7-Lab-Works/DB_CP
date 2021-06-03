@@ -4,10 +4,10 @@
 {% block title %}GuideAdd{% endblock %}
 
 {% block content %}
-<h2>Add Guide</h2>
+<h2>Добавление гида</h2>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-  <button type="submit">Add guide</button>
+  <button type="submit">Добавить</button>
 </form>
 {% endblock %}

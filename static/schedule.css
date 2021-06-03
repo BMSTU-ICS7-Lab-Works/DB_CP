@@ -1,0 +1,56 @@
+#id_Понедельник
+{
+    position: absolute;
+    left: 10px;
+    top: 130px;
+}
+#id_Вторник
+{
+    position: absolute;
+    left: 140px;
+    top: 130px;
+}
+#id_Среда
+{
+    position: absolute;
+    left: 270px;
+    top: 130px;
+}
+#id_Четверг
+{
+    position: absolute;
+    left: 420px;
+    top: 130px;
+}
+#id_Пятница
+{
+    position: absolute;
+    left: 550px;
+    top: 130px;
+}
+#id_Суббота
+{
+    position: absolute;
+    left: 700px;
+    top: 130px;
+}
+#id_Воскресенье
+{
+    position: absolute;
+    left: 850px;
+    top: 130px;
+}
+
+p
+{
+    float: left;
+    margin-left: 20px;
+    width: 50px;
+}
+
+.sendButton
+{
+    position: absolute;
+    left: 440px;
+    top: 80px;
+}

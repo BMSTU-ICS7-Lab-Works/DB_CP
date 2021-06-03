@@ -9,8 +9,12 @@ drop user unlogged_user;
 drop user logged_user;
 drop user guide;
 
-create role unlogged_role;
 drop role unlogged_role;
+drop role logged_role;
+drop role guide_role;
+
+
+create role unlogged_role;
 GRANT select on excursions to unlogged_role;
 GRANT select on guides to unlogged_role;
 GRANT select on schedule to unlogged_role;
@@ -18,17 +22,16 @@ GRANT select on sights to unlogged_role;
 GRANT select on "SightsExcursions" to unlogged_role;
 GRANT select on users to unlogged_role;
 
-REVOKE select on excursions from unlogged_role;
-REVOKE select on guides from unlogged_role;
-REVOKE select on schedule from unlogged_role;
-REVOKE select on sights from unlogged_role;
-REVOKE select on "SightsExcursions" from unlogged_role;
-REVOKE select on users from unlogged_role
+-- REVOKE select on excursions from unlogged_role;
+-- REVOKE select on guides from unlogged_role;
+-- REVOKE select on schedule from unlogged_role;
+-- REVOKE select on sights from unlogged_role;
+-- REVOKE select on "SightsExcursions" from unlogged_role;
+-- REVOKE select on users from unlogged_role
 
 GRANT unlogged_role TO unlogged_user;
 
 create role logged_role;
-drop role logged_role;
 
 GRANT select on excursions to logged_role;
 GRANT select on guides to logged_role;
@@ -52,7 +55,6 @@ GRANT logged_role TO logged_user;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO logged_user;
 
 create role guide_role;
-drop role guide_role;
 
 GRANT select on excursions to guide_role;
 GRANT select on guides to guide_role;
@@ -88,5 +90,4 @@ GRANT guide_role TO guide;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO guide;
 select pg_has_role('postgres', 'postgres');
 
-set role only_read
 set role postgres

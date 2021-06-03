@@ -4,11 +4,11 @@
 {% block title %}ExcursionAdd{% endblock %}
 
 {% block content %}
-<h2>Add Excursion</h2>
+<h2>Создание основной информации об экскурсии</h2>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
-    {% if request.session.role == 2%}
+    {% if request.session.role == 3%}
         <p>Нету гида?</p>
         <a href="{% url 'createGuide' %}">Добавить</a>
     {% endif %}

@@ -4,10 +4,13 @@
 {% block title %}ExcursionAdd{% endblock %}
 
 {% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static "schedule.css"%}">
+</head>
 
-    <h2>Make schedule to Excursion</h2>
-    <p>Название вашей экскурсии</p>
-    <p id="excursion_name">{{excursion_name}}</p>
+    <h2>Создание расписания к экскурсии</h2>
+    <div>Название вашей экскурсии: </div>
+    <div id="excursion_name">{{excursion_name}}</div>
 
     <form method="post">
         {% csrf_token %}

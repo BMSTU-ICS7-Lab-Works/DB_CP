@@ -1,10 +1,9 @@
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import Column, Integer, String, Date, ForeignKey, create_engine, Table, DATE
 from sqlalchemy.ext.declarative import declarative_base
 
 admin_engine = create_engine("postgresql+psycopg2://postgres:1@localhost/Excursions")
 Base = declarative_base()
-
 
 SightsExcursions = Table('SightsExcursions', Base.metadata,
     Column('sightsId', Integer,
@@ -122,12 +121,6 @@ if __name__ == '__main__':
     # Session = sessionmaker(bind=admin_engine)
     # session = Session()
     # vasiliSight = Sights('Храм Василия Блаженного', '02-10-1552', 'Шатровый храм', 'Постник Яковлев', 'православный '
-    #                                                 'храм на Красной площади в Москве, памятник русской архитектуры.')
+    #                                                  'храм на Красной площади в Москве, памятник русской архитектуры.')
     # session.add(vasiliSight)
-    # # ourSight = session.query(Sights).first()
-    # # print(ourSight)
-    # # print(vasiliSight.id)
     # session.commit()
-    # #print(vasiliSight.id)
-    # session.close()
-

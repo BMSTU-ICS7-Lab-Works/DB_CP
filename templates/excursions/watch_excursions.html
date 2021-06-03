@@ -50,7 +50,7 @@
 
     {% for sight in sights %}
         {% if forloop.parentloop.counter == forloop.counter %}
-        <td> {% for s in sight %} <a href="{% url 'sight_detail' sight_id=s.id %}">{{s.name}}</a> {% endfor %}</td>
+        <td> {% for s in sight %} <a href="{% url 'sight_detail' sight_id=s.id %}">{{s.name}}<br></a> {% endfor %}</td>
         {% endif %}
     {% endfor %}
     <td>Выберите дату: <input type="text" class="datetimepicker" id="datetimepicker_{{ forloop.counter }}"></td>

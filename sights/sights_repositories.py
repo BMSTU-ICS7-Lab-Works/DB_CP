@@ -22,5 +22,6 @@ class SightsRepository:
         return self.session.query(Sights).all()
 
     def addSight(self, sight):
+        print(self.session)
         self.session.add(sight)
         self.session.commit()

@@ -18,17 +18,19 @@ def detail(request, guide_fio):
 def createGuide(request):
 
     if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        patronymic = request.POST.get("patronymic")
-        qualification = request.POST.get("qualification")
-        biography = request.POST.get("biography")
-        experience = request.POST.get("experience")
+        form = createGuideForm(request.POST)
+        if form.is_valid():
+            first_name = request.POST.get("first_name")
+            last_name = request.POST.get("last_name")
+            patronymic = request.POST.get("patronymic")
+            qualification = request.POST.get("qualification")
+            biography = request.POST.get("biography")
+            experience = request.POST.get("experience")
 
-        addGuide(first_name, last_name, patronymic, qualification, biography, experience, request.session['role'])
-        return redirect('/success')
+            addGuide(first_name, last_name, patronymic, qualification, biography, experience, request.session['role'])
+            return redirect('/success')
     else:
-        if request.session['role'] > 1:
+        if request.session['role'] > 2:
             form = createGuideForm()
         else:
             return redirect('/home')

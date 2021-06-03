@@ -16,10 +16,14 @@ class createExcursionForm(forms.Form):
 
         self.fields['guides'] = forms.ChoiceField(choices=names)
 
-    name = forms.CharField()
-    description = forms.CharField(widget=forms.Textarea)
-    price = forms.IntegerField()
-    guides = forms.ChoiceField()
+    def clean_price(self):
+        price = self.cleaned_data['price']
+        if price < 0:
+            raise forms.ValidationError('Цена экскурсии не может быть отрицательной!')
+    name = forms.CharField(label='Название')
+    description = forms.CharField(widget=forms.Textarea, label='Описание экскурсии')
+    price = forms.IntegerField(label='Цена')
+    guides = forms.ChoiceField(label='выберите гида')
 
 
 class timeSelectForm(forms.Form):
@@ -32,7 +36,7 @@ class timeSelectForm(forms.Form):
             schedule.append((i+1, time.day + ' ' + time.time))
 
         self.fields['time'] = forms.ChoiceField(choices=schedule)
-    time = forms.ChoiceField()
+    time = forms.ChoiceField(label='время')
 
 class scheduleSelectForm(forms.Form):
     Понедельник = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=filltime)
@@ -46,6 +50,6 @@ class scheduleSelectForm(forms.Form):
 
 
 class confirmationForm(forms.Form):
-    name = forms.CharField()
-    phone = PhoneNumberField()
+    name = forms.CharField(label='Имя')
+    phone = PhoneNumberField(label='Номер телефона')
 

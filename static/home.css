@@ -1,0 +1,51 @@
+#logout {
+position: absolute; /* Абсолютное позиционирование */
+left: 10px; /* Положение элемента от правого края */
+top: 80px; /* Положение от верхнего края */
+}
+#watch_excursions
+{
+    position: absolute;
+    left: 10px;
+    top: 110px;
+}
+#createExcursion
+{
+    position: absolute;
+    left: 10px;
+    top: 140px;
+}
+#createSight
+{
+    position: absolute;
+    left: 10px;
+    top: 170px;
+}
+#createGuide
+{
+    position: absolute;
+    left: 10px;
+    top: 200px;
+}
+#setRole
+{
+    position: absolute;
+    left: 10px;
+    top: 230px;
+}
+#deletePast
+{
+    position: absolute;
+    left: 10px;
+    top: 260px;
+}
+
+#about
+{
+    position: absolute;
+    left: 280px;
+    top: 15px;
+}
+/*body {*/
+/*  background-color: lightblue;*/
+/*}*/
